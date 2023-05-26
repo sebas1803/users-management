@@ -20,6 +20,8 @@ public class SaveUserRequestDto {
     private String lastName;
 
     @NotBlank(message = "Identity document is required")
+    @Size(max = 12, message = "Identity document must have a maximum of 12 characters")
+    @Pattern(regexp = "^[0-9]+$", message = "Identity document must contain only digits")
     private String idDocument;
 
     @NotBlank(message = "Phone number is required")
@@ -28,7 +30,7 @@ public class SaveUserRequestDto {
     private String phone;
 
     @NotBlank(message = "Email is required")
-    @Email(message = "Email must have a valid format")
+    @Email(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Email must have a valid format")
     private String email;
 
     @NotBlank(message = "Password is required")

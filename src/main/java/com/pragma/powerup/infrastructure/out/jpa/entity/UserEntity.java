@@ -9,9 +9,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email"),
         @UniqueConstraint(columnNames = "idDocument"),
-        @UniqueConstraint(columnNames = "phone")
+        @UniqueConstraint(columnNames = "phone"),
+        @UniqueConstraint(columnNames = "email"),
 })
 @AllArgsConstructor
 @NoArgsConstructor
