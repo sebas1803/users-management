@@ -1,16 +1,13 @@
-package com.pragma.powerup.domain.model;
+package com.pragma.powerup.application.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserModel {
-    private Long id;
+@RequiredArgsConstructor
+public class UserResponseDto {
     private String name;
     private String lastName;
     private String idDocument;
