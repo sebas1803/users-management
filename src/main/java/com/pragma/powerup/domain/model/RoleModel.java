@@ -5,19 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel {
+public class RoleModel {
     private Long id;
     private String name;
-    private String lastName;
-    private String idDocument;
-    private String phone;
-    private String email;
-    private String password;
-    private List<RoleModel> roles;
+
+    public RoleModel(Long id) {
+        this.id = id;
+    }
+
+    public RoleModel(String name) {
+        this.name = name;
+    }
 }

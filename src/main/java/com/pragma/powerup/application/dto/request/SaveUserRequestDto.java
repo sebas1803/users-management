@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,4 +33,7 @@ public class SaveUserRequestDto {
 
     @NotBlank(message = "Password is required")
     private String password;
+
+    @NotEmpty(message = "Roles must not be empty")
+    private List<String> roles;
 }

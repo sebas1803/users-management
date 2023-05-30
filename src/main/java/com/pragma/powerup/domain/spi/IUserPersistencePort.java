@@ -2,6 +2,7 @@ package com.pragma.powerup.domain.spi;
 
 import com.pragma.powerup.domain.model.UserModel;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUserPersistencePort {

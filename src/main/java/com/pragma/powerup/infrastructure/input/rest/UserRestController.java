@@ -30,9 +30,8 @@ public class UserRestController {
 
     @Operation(summary = "Create a new user")
     @ApiResponse(responseCode = "201", description = "User created", content = @Content)
-    @PostMapping("/")
+    @PostMapping()
     public ResponseEntity<?> createUser(@Valid @RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
-        //List all current errors
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(FieldError::getDefaultMessage)

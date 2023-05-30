@@ -5,6 +5,7 @@ import com.pragma.powerup.domain.spi.IUserPersistencePort;
 import com.pragma.powerup.infrastructure.out.jpa.entity.UserEntity;
 import com.pragma.powerup.infrastructure.out.jpa.mapper.IUserEntityMapper;
 import com.pragma.powerup.infrastructure.out.jpa.repository.IUserRepository;
+import com.pragma.powerup.infrastructure.utility.UserUtil;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -17,6 +18,8 @@ public class UserJpaAdapter implements IUserPersistencePort {
     @Override
     public void saveUser(UserModel userModel) {
         UserEntity userEntity = userRepository.save(userEntityMapper.toEntity(userModel));
+        String encryptedPassword = UserUtil.encryptPassword(userModel.getPassword());
+        userEntity.setPassword(encryptedPassword);
         userEntityMapper.toUserModel(userEntity);
     }
 
