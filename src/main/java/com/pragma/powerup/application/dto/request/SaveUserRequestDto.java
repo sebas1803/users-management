@@ -33,7 +33,4 @@ public class SaveUserRequestDto {
 
     @NotBlank(message = "Password is required")
     private String password;
-
-    @NotEmpty(message = "Roles must not be empty")
-    private List<String> roles;
 }

@@ -15,18 +15,6 @@ import java.util.stream.Collectors;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IUserRequestMapper {
-
-    @Mapping(target = "roles", source = "roles", qualifiedByName = "mapRoles")
     UserModel toUserModel(SaveUserRequestDto saveUserRequestDto);
 
-    @Named("mapRoles")
-    default List<RoleModel> mapRoles(List<String> roles) {
-        return roles.stream()
-                .map(role -> {
-                    RoleModel roleModel = new RoleModel();
-                    roleModel.setName(role);
-                    return roleModel;
-                })
-                .collect(Collectors.toList());
-    }
 }

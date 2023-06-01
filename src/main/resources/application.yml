@@ -13,3 +13,6 @@ spring:
     show-sql: true
 appDescription: "Pragma PowerUp FoodCourt Hexagonal Microservices"
 appVersion: "1.0.0"
+
+jwt:
+  expiration: 840000000
