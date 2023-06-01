@@ -12,9 +12,15 @@ import com.pragma.powerup.infrastructure.out.jpa.mapper.IRoleEntityMapper;
 import com.pragma.powerup.infrastructure.out.jpa.mapper.IUserEntityMapper;
 import com.pragma.powerup.infrastructure.out.jpa.repository.IRoleRepository;
 import com.pragma.powerup.infrastructure.out.jpa.repository.IUserRepository;
+import com.pragma.powerup.infrastructure.security.jwt.JwtFilter;
+import com.pragma.powerup.infrastructure.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
@@ -45,5 +51,21 @@ public class BeanConfiguration {
     @Bean
     public IUserServicePort userServicePort() {
         return new UserUseCase(userPersistencePort(), rolePersistencePort());
+    }
+
+    // Authentication
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public JwtFilter jwtTokenFilter() {
+        return new JwtFilter();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 }
