@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -29,37 +30,32 @@ public class UserHandler implements IUserHandler {
         userServicePort.saveUser(userModel);
     }
 
+    private void saveUserWithRole(SaveUserRequestDto saveUserRequestDto, String roleName) {
+        UserModel userModel = userRequestMapper.toUserModel(saveUserRequestDto);
+        RoleModel roleModel = new RoleModel();
+        roleModel.setName(roleName);
+        userModel.setRoles(Collections.singletonList(roleModel));
+        userServicePort.saveUser(userModel);
+    }
+
     @Override
     public void saveAdmin(SaveUserRequestDto saveUserRequestDto) {
-        UserModel userModel = userRequestMapper.toUserModel(saveUserRequestDto);
-        RoleModel adminRole = new RoleModel();
-        adminRole.setName("ROLE_ADMIN");
-        List<RoleModel> roles = new ArrayList<>();
-        roles.add(adminRole);
-        userModel.setRoles(roles);
-        userServicePort.saveUser(userModel);
+        saveUserWithRole(saveUserRequestDto, "ROLE_ADMIN");
     }
 
     @Override
     public void saveOwner(SaveUserRequestDto saveUserRequestDto) {
-        UserModel userModel = userRequestMapper.toUserModel(saveUserRequestDto);
-        RoleModel ownerRole = new RoleModel();
-        ownerRole.setName("ROLE_OWNER");
-        List<RoleModel> roles = new ArrayList<>();
-        roles.add(ownerRole);
-        userModel.setRoles(roles);
-        userServicePort.saveUser(userModel);
+        saveUserWithRole(saveUserRequestDto, "ROLE_OWNER");
     }
 
     @Override
     public void saveEmployee(SaveUserRequestDto saveUserRequestDto) {
-        UserModel userModel = userRequestMapper.toUserModel(saveUserRequestDto);
-        RoleModel employeeRole = new RoleModel();
-        employeeRole.setName("ROLE_EMPLOYEE");
-        List<RoleModel> roles = new ArrayList<>();
-        roles.add(employeeRole);
-        userModel.setRoles(roles);
-        userServicePort.saveUser(userModel);
+        saveUserWithRole(saveUserRequestDto, "ROLE_EMPLOYEE");
+    }
+
+    @Override
+    public void saveClient(SaveUserRequestDto saveUserRequestDto) {
+        saveUserWithRole(saveUserRequestDto, "ROLE_CLIENT");
     }
 
     @Override

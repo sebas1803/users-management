@@ -33,7 +33,7 @@ public class UserRestController {
     @Operation(summary = "Create a new admin")
     @ApiResponse(responseCode = "201", description = "Admin created", content = @Content)
     @PostMapping("/admin")
-    public ResponseEntity<?> createAdmin(@RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
+    public ResponseEntity<?> createAdmin(@Valid @RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(FieldError::getDefaultMessage)
@@ -48,7 +48,7 @@ public class UserRestController {
     @Operation(summary = "Create a new owner")
     @ApiResponse(responseCode = "201", description = "Owner created", content = @Content)
     @PostMapping("/owner")
-    public ResponseEntity<?> createOwner(@RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
+    public ResponseEntity<?> createOwner(@Valid @RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(FieldError::getDefaultMessage)
@@ -63,7 +63,7 @@ public class UserRestController {
     @Operation(summary = "Create a new employee")
     @ApiResponse(responseCode = "201", description = "Employee created", content = @Content)
     @PostMapping("/employee")
-    public ResponseEntity<?> createEmployee(@RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
+    public ResponseEntity<?> createEmployee(@Valid @RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(FieldError::getDefaultMessage)
@@ -74,18 +74,17 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Employee user created successfully");
     }
 
-    /* Possible implementation of creation of client
     @Operation(summary = "Create a new client")
     @ApiResponse(responseCode = "201", description = "Client created", content = @Content)
     @PostMapping("/client")
-    public ResponseEntity<?> createClient(@RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
+    public ResponseEntity<?> createClient(@Valid @RequestBody SaveUserRequestDto saveUserRequestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(FieldError::getDefaultMessage)
                     .collect(Collectors.toList());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
-        userHandler.saveEmployee(saveUserRequestDto); // Change method
+        userHandler.saveClient(saveUserRequestDto);
         return ResponseEntity.ok("Client user created successfully");
-    }*/
+    }
 }

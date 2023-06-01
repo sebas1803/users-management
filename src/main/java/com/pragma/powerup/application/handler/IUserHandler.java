@@ -12,5 +12,7 @@ public interface IUserHandler {
 
     void saveEmployee(SaveUserRequestDto saveUserRequestDto);
 
+    void saveClient(SaveUserRequestDto saveUserRequestDto);
+
     UserResponseDto findById(Long id);
 }
