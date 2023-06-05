@@ -16,3 +16,4 @@ appVersion: "1.0.0"
 
 jwt:
   expiration: 840000000
+  secret-key: mi-clave-secreta-personalizada-de-32-bytes

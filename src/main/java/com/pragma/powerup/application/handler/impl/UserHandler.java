@@ -61,4 +61,10 @@ public class UserHandler implements IUserHandler {
         UserModel userModel = userServicePort.findById(id);
         return userResponseMapper.toUserResponse(userModel);
     }
+
+    @Override
+    public UserResponseDto findByEmail(String email) {
+        UserModel userModel = userServicePort.findByEmail(email);
+        return userResponseMapper.toUserResponse(userModel);
+    }
 }

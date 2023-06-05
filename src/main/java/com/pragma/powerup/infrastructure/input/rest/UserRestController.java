@@ -89,9 +89,17 @@ public class UserRestController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(summary = "Returns user by ID")
     @ApiResponse(responseCode = "200", description = "User found", content = @Content)
-    @GetMapping("{userId}")
+    @GetMapping("/findById/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {
         UserResponseDto userResponse = userHandler.findById(userId);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    @Operation(summary = "Returns user by email")
+    @ApiResponse(responseCode = "200", description = "User found", content = @Content)
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        UserResponseDto userResponse = userHandler.findByEmail(email);
         return ResponseEntity.ok(userResponse);
     }
 }

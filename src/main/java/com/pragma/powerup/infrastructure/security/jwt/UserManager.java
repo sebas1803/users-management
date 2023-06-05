@@ -68,4 +68,3 @@ public class UserManager implements UserDetails {
         return true;
     }
 }
-
