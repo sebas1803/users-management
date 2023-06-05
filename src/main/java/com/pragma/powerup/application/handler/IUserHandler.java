@@ -15,4 +15,6 @@ public interface IUserHandler {
     void saveClient(SaveUserRequestDto saveUserRequestDto);
 
     UserResponseDto findById(Long id);
+
+    UserResponseDto findByEmail(String email);
 }

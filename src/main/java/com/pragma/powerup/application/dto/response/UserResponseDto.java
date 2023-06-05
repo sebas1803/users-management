@@ -1,8 +1,11 @@
 package com.pragma.powerup.application.dto.response;
 
+import com.pragma.powerup.domain.model.RoleModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,5 +16,5 @@ public class UserResponseDto {
     private String idDocument;
     private String phone;
     private String email;
-    private String password;
+    private List<String> roles;
 }

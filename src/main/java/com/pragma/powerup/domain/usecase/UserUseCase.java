@@ -42,7 +42,7 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public Optional<UserModel> findByEmail(String email) {
+    public UserModel findByEmail(String email) {
         return userPersistencePort.findByEmail(email);
     }
 

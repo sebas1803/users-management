@@ -30,8 +30,8 @@ public class UserJpaAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public Optional<UserModel> findByEmail(String email) {
+    public UserModel findByEmail(String email) {
         UserEntity userEntity = userRepository.findByEmail(email).orElse(null);
-        return Optional.ofNullable(userEntityMapper.toUserModel(userEntity));
+        return userEntityMapper.toUserModel(userEntity);
     }
 }

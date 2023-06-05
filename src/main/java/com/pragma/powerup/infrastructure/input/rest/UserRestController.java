@@ -1,6 +1,7 @@
 package com.pragma.powerup.infrastructure.input.rest;
 
 import com.pragma.powerup.application.dto.request.SaveUserRequestDto;
+import com.pragma.powerup.application.dto.response.UserResponseDto;
 import com.pragma.powerup.application.handler.IUserHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -86,5 +84,22 @@ public class UserRestController {
         }
         userHandler.saveClient(saveUserRequestDto);
         return ResponseEntity.ok("Client user created successfully");
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @Operation(summary = "Returns user by ID")
+    @ApiResponse(responseCode = "200", description = "User found", content = @Content)
+    @GetMapping("/findById/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable Long userId) {
+        UserResponseDto userResponse = userHandler.findById(userId);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    @Operation(summary = "Returns user by email")
+    @ApiResponse(responseCode = "200", description = "User found", content = @Content)
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        UserResponseDto userResponse = userHandler.findByEmail(email);
+        return ResponseEntity.ok(userResponse);
     }
 }

@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +59,12 @@ public class UserHandler implements IUserHandler {
     @Override
     public UserResponseDto findById(Long id) {
         UserModel userModel = userServicePort.findById(id);
+        return userResponseMapper.toUserResponse(userModel);
+    }
+
+    @Override
+    public UserResponseDto findByEmail(String email) {
+        UserModel userModel = userServicePort.findByEmail(email);
         return userResponseMapper.toUserResponse(userModel);
     }
 }

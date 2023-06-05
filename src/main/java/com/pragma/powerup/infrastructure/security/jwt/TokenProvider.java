@@ -19,31 +19,35 @@ public class TokenProvider {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    private Key key;
-
-    @PostConstruct
-    public void init() {
-        key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    }
+    @Value("${jwt.secret-key}")
+    private String secretKey;
 
     public String generateToken(Authentication authentication) {
         UserManager userPrincipal = (UserManager) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
-                .setIssuedAt(new Date()).setExpiration(new Date((new Date()).getTime() + expiration))
-                .signWith(key, SignatureAlgorithm.HS256)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + expiration))
+                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String getEmailFromToken(String token) {
-        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(key).parseClaimsJws(token);
+            Jwts.parserBuilder()
+                    .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                    .build()
+                    .parseClaimsJws(token);
             return true;
-
         } catch (MalformedJwtException e) {
             LOGGER.error("Invalid token");
         } catch (UnsupportedJwtException e) {
