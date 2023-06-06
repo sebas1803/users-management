@@ -6,6 +6,7 @@ import com.pragma.powerup.application.handler.IUserHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @Tag(name = "Users")
 @RequestMapping("api/v1/users")
+@SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 public class UserRestController {
 
