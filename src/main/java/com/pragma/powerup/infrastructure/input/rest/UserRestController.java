@@ -88,7 +88,7 @@ public class UserRestController {
         return ResponseEntity.ok("Client user created successfully");
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @Operation(summary = "Returns user by ID")
     @ApiResponse(responseCode = "200", description = "User found", content = @Content)
     @GetMapping("/findById/{userId}")
