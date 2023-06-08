@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,7 +16,8 @@ public class UserModel {
     private String name;
     private String lastName;
     private String idDocument;
-    private String cellphone;
+    private String phone;
     private String email;
     private String password;
+    private List<RoleModel> roles;
 }

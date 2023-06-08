@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface IUserServicePort {
     void saveUser(UserModel userModel);
+
     UserModel findById(Long id);
-    Optional<UserModel> findByEmail(String email);
+
+    UserModel findByEmail(String email);
 }
